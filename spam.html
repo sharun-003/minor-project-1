@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cognimate Chatbot</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f2f2f2;
+    }
+
+    .chat-container {
+      max-width: 400px;
+      margin: 50px auto;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    .chat-box {
+      max-height: 300px;
+      overflow-y: auto;
+      padding: 10px;
+    }
+
+    .chat-bubble {
+      display: flex;
+      margin-bottom: 10px;
+    }
+
+    .avatar {
+      width: 30px;
+      height: 30px;
+      margin-right: 10px;
+      border-radius: 50%;
+    }
+
+    .message {
+      background-color: #e6e6e6;
+      padding: 10px;
+      border-radius: 10px;
+      max-width: 70%;
+    }
+
+    .bot .message {
+      background-color: #d3eef2;
+      align-self: flex-start;
+    }
+
+    .user .message {
+      background-color: #ffe6cc;
+      align-self: flex-end;
+    }
+
+    .user-input {
+      width: calc(100% - 100px);
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-right: 10px;
+    }
+
+    .generate-btn {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .generate-btn:hover {
+      background-color: #0056b3;
+    }
+
+    .input-container {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <h1 style="text-align: center;">spam defender</h1>
+    <div class="chat-box" id="chat-box">
+      <div class="chat-bubble bot">
+        <img src="https://img.freepik.com/free-vector/graident-ai-robot-vectorart_78370-4114.jpg?size=338&ext=jpg&ga=GA1.1.1395880969.1709510400&semt=ais" alt="Cognimate Avatar" class="avatar">
+        <div class="message">Hi, can I help you with anything?</div>
+      </div>
+    </div>
+    <div class="input-container">
+      <input type="text" id="user-input" class="user-input" placeholder="Type your message...">
+      <button onclick="generateResponse()" class="generate-btn">Generate Response</button>
+    </div>
+  </div>
+
+  <script>
+    function generateResponse() {
+      const userInput = document.getElementById('user-input').value;
+      const chatBox = document.getElementById('chat-box');
+
+      const userQuery = document.createElement('div');
+      userQuery.classList.add('chat-bubble', 'user');
+      userQuery.innerHTML = `
+        <div class="message">${userInput}</div>
+      `;
+
+      chatBox.appendChild(userQuery);
+
+      const botResponse = document.createElement('div');
+      botResponse.classList.add('chat-bubble', 'bot');
+      botResponse.innerHTML = `
+        <img src="https://img.freepik.com/free-vector/graident-ai-robot-vectorart_78370-4114.jpg?size=338&ext=jpg&ga=GA1.1.1395880969.1709510400&semt=ais" alt="Cognimate Avatar" class="avatar">
+        <div class="message">${getResponse(userInput)}</div>
+      `;
+
+      chatBox.appendChild(botResponse);
+    }
+
+    function getResponse(userInput) {
+      const query = userInput.toLowerCase();
+      if (query.includes('you won a lottery 1 lakh rupees')) {
+        return "this is a spam.";
+      } else if (query.includes('what is the capital of india')) {
+        return "The capital of India is New Delhi.";
+      } else if (query.includes('what is the formula for water')) {
+        return "The chemical formula for water is H2O.";
+      } else if (query.includes('what is the tallest mountain in the world')) {
+        return "Mount Everest, located in the Himalayas, is the tallest mountain in the world.";
+      } else if (query.includes('who wrote the play hamlet')) {
+        return "The play Hamlet was written by William Shakespeare.";
+      } else if (query.includes('what is the boiling point of water in celsius')) {
+        return "The boiling point of water in Celsius is 100 degrees.";
+      } else {
+        return "I'm sorry, I don't understand that question. Can you please ask something else?";
+      }
+    }
+  </script>
+</body>
+</html>
+
+
